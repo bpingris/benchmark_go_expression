@@ -1,5 +1,6 @@
 # Benchmarks
 
+```
 goos: darwin
 goarch: arm64
 pkg: github.com/benchmark_go_expression
@@ -21,3 +22,4 @@ Benchmark/gval#03/parsing_complex-8               155883              7652 ns/op
 Benchmark/gval#03/evaluating_complex-8          203008358                5.946 ns/op
 PASS
 ok      github.com/benchmark_go_expression      23.558s
+```
