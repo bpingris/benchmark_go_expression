@@ -33,13 +33,18 @@ func Benchmark(b *testing.B) {
 			name: "complex",
 			expr: `foo > 20 && 
             2 > 1 &&
-			"something" != "nothing" ||
+			jon != "nothing" ||
+            smith == jon ||
 			bar <= 50 &&
+            baz == true &&
 			modifierTest + 1000 / 2 > (80 * 100 % 2)`,
 			params: map[string]interface{}{
 				"foo":          10,
 				"modifierTest": 5,
 				"bar":          10,
+				"baz":          true,
+				"jon":          "hello",
+				"smith":        "world",
 			},
 		},
 	}
