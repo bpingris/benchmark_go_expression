@@ -24,25 +24,25 @@ func Benchmark(b *testing.B) {
 		},
 		{
 			name: "var",
-			expr: "foo < 20",
+			expr: "foo > 20",
 			params: map[string]interface{}{
 				"foo": 10,
 			},
 		},
 		{
 			name: "complex",
-			expr: `2 > 1 &&
+			expr: `foo > 20 && 
+            2 > 1 &&
 			"something" != "nothing" ||
-			"2014-01-20" < "Wed Jul  8 23:07:35 MDT 2015" &&
-			["Variable name with spaces"] <= 50 &&
+			bar <= 50 &&
 			modifierTest + 1000 / 2 > (80 * 100 % 2)`,
 			params: map[string]interface{}{
-				"modifierTest":              5,
-				"Variable name with spaces": 10,
+				"foo":          10,
+				"modifierTest": 5,
+				"bar":          10,
 			},
 		},
 	}
-
 	for _, bb := range benchs {
 		exp, err := govaluate.NewEvaluableExpression(bb.expr)
 		if err != nil {
