@@ -6,6 +6,7 @@ import (
 
 	"github.com/Knetic/govaluate"
 	"github.com/PaesslerAG/gval"
+	"github.com/antonmedv/expr"
 )
 
 func Benchmark(b *testing.B) {
@@ -87,6 +88,26 @@ func Benchmark(b *testing.B) {
 					}
 				}
 
+			})
+		})
+
+		out, err := expr.Compile(bb.expr)
+		if err != nil {
+			b.Fatal(err)
+		}
+		b.Run("expr", func(b *testing.B) {
+			b.Run("parsing_"+bb.name, func(b *testing.B) {
+				for i := 0; i < b.N; i++ {
+					expr.Compile(bb.expr)
+				}
+			})
+			b.Run("evaluating_"+bb.name, func(b *testing.B) {
+				for i := 0; i < b.N; i++ {
+					_, err := expr.Run(out, bb.params)
+					if err != nil {
+						b.Fatal(err)
+					}
+				}
 			})
 		})
 	}
